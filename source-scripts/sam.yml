@@ -1,0 +1,13 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: ubuntu
+    tag: focal
+
+inputs:
+  - name: source-scripts
+
+run:
+  path: ./source-scripts/whatever.sh

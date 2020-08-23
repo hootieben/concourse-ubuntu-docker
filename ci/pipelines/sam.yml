@@ -1,0 +1,73 @@
+---
+resources:
+  - name: ubuntu-focal-image
+    type: registry-image
+    icon: docker
+    source:
+      repository: ubuntu
+      tag: focal
+
+  - name: tfenv-release
+    type: github-release
+    icon: github
+    source:
+      owner: tfutils
+      repository: tfenv
+      uri: https://github.com/tfutils/tfenv.git
+      release: true
+
+  - name: ubuntu-docker-git
+    type: git
+    icon: github
+    source:
+      uri: https://github.com/hootieben/concourse-ubuntu-docker.git
+
+task-config: &task-config
+  platform: linux
+  inputs:
+    - name: tfenv-release
+    - name: ubuntu-docker-git
+  run:
+    path: /usr/bin/bash
+    args:
+      - -c
+      - |
+        apt-get -q update && apt-get -q -y install python3-pip unzip git curl
+        pip3 install aws-sam-cli
+        #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        #unzip awscliv2.zip
+        #./aws/install
+
+        #aws --version
+        #sam --version
+
+        ln -s /usr/local/tfenv/bin/* /usr/local/bin
+
+        git clone https://github.com/cunymatthieu/tgenv.git /usr/local/tgenv
+        ln -s /usr/local/tgenv/bin/* /usr/local/bin
+
+
+        tfenv install latest
+        tfenv use latest
+
+        tgenv install latest
+        tgenv use latest
+
+        ls -al /usr/local/bin
+        ls -al /usr/local/tfenv/bin/
+        ls -al /usr/local/tgenv/bin/
+
+        terraform version
+        tgenv list
+
+jobs:
+  - name: test-platform
+    plan:
+      - get: ubuntu-focal-image
+        trigger: true
+      - get: tfenv-release
+        trigger: true
+      - task: setup
+        image: ubuntu-focal-image
+        config:
+          << : *task-config
