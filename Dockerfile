@@ -5,7 +5,7 @@ ARG tgenv
 RUN set -xe \
   \
   && apt-get -q update \
-  && apt-get -q -y install unzip git curl \
+  && apt-get -q -y install unzip git curl python3-pip\
   && git config --global advice.detachedHead false \
   && git clone --depth 1 --branch $tfenv https://github.com/tfutils/tfenv.git /usr/local/tfenv \
   && git clone --depth 1 --branch $tgenv https://github.com/cunymatthieu/tgenv.git /usr/local/tgenv 
