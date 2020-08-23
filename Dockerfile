@@ -7,7 +7,7 @@ RUN set -xe \
   && apt-get -q update \
   && apt-get -q -y install unzip git curl \
   && git clone --depth 1 --branch $tfenv https://github.com/tfutils/tfenv.git /usr/local/tfenv \
-  && git clone --depth 1 --branch $tfenv https://github.com/cunymatthieu/tgenv.git /usr/local/tgenv 
+  && git clone --depth 1 --branch $tgenv https://github.com/cunymatthieu/tgenv.git /usr/local/tgenv 
 
 RUN set -xe \
   \
