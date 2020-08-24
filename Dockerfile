@@ -2,6 +2,9 @@ FROM ubuntu:focal
 ARG tfenv
 ARG tgenv
 
+RUN echo $tfenv
+RUN echo $tgenv
+
 RUN set -xe \
   \
   && apt-get -q update \
