@@ -29,5 +29,5 @@ COPY --from=aws /root/.local /root/.local
 COPY --from=tfenv /root/.tfenv /root/.tfenv
 COPY --from=tgenv /root/.tgenv /root/.tgenv
 
-ENV PATH=/root/.tfenv/bin:/root/tgenv/bin:root/.local/bin:$PATH
+ENV PATH=/root/.tfenv/bin:/root/.tgenv/bin:root/.local/bin:$PATH
 CMD ["/bin/bash"]
