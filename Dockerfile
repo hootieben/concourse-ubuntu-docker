@@ -17,10 +17,12 @@ RUN pip3 install --user aws-sam-cli\
 
 FROM base AS tfenv
 COPY tfenv-release /root/.tfenv
+ENV PATH=/root/.tfenv/bin:/root/.tgenv/bin:root/.local/bin:$PATH
 RUN /root/.tfenv/bin/tfenv install latest
 
 FROM base AS tgenv
 COPY tgenv-release /root/.tgenv
+ENV PATH=/root/.tfenv/bin:/root/.tgenv/bin:root/.local/bin:$PATH
 RUN /root/.tgenv/bin/tgenv install 0.23.12
 
 FROM base
