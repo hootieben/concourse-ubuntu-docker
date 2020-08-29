@@ -2,5 +2,6 @@
 
 for i in tfenv-release tgenv-release
 do 
-  tar xvzf $i/source.tar.gz -C ubuntu-docker-git/$i
+  mkdir ubuntu-docker-git/$i
+  tar xvzf $i/source.tar.gz --strip-components=1 -C ubuntu-docker-git/$i
 done
